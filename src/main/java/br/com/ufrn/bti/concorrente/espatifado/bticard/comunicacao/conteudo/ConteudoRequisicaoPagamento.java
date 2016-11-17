@@ -1,18 +1,18 @@
-package br.com.ufrn.bti.concorrente.espatifado.bticard.comunicacao;
+package br.com.ufrn.bti.concorrente.espatifado.bticard.comunicacao.conteudo;
 
 import br.com.ufrn.bti.concorrente.espatifado.bticard.dominio.Pessoa;
 
-public class MensagemRequisicao {
+public class ConteudoRequisicaoPagamento {
 	
 	private Pessoa pessoa;
 	private double valorPagamento;
 
-	public MensagemRequisicao(Pessoa pessoa, double valorPagamento) {
+	public ConteudoRequisicaoPagamento(Pessoa pessoa, double valorPagamento) {
 		this.pessoa = pessoa;
 		this.valorPagamento = valorPagamento;
 	}
 
-	public MensagemRequisicao() {
+	public ConteudoRequisicaoPagamento() {
 		// TODO Auto-generated constructor stub
 	}
 

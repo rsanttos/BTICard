@@ -5,6 +5,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import br.com.ufrn.bti.concorrente.espatifado.bticard.comunicacao.conteudo.ConteudoRequisicaoPagamento;
+import br.com.ufrn.bti.concorrente.espatifado.bticard.comunicacao.mensagem.MensagemRequisicao;
+import br.com.ufrn.bti.concorrente.espatifado.bticard.comunicacao.mensagem.MensagemResposta;
+import br.com.ufrn.bti.concorrente.espatifado.bticard.comunicacao.mensagem.TipoMensagem;
 import br.com.ufrn.bti.concorrente.espatifado.bticard.servico.PagamentoServico;
 
 public class TratadorRequisicoes implements Runnable {
@@ -12,7 +16,7 @@ public class TratadorRequisicoes implements Runnable {
 	private Socket socket;
 	private ObjectInputStream inputStream;
 	private ObjectOutputStream outputStream;
-	private MensagemRequisicao mensagem;
+	private MensagemRequisicao<ConteudoRequisicaoPagamento> mensagem;
 
 	private PagamentoServico servico;
 
@@ -32,26 +36,39 @@ public class TratadorRequisicoes implements Runnable {
 		}
 
 		try {
-			this.mensagem = (MensagemRequisicao) this.inputStream.readObject();
+			this.mensagem = (MensagemRequisicao<ConteudoRequisicaoPagamento>) this.inputStream.readObject();
 		} catch (ClassNotFoundException | IOException e) {
 			System.out.println("ERRO na leitura do objeto recebido!");
 			e.printStackTrace();
 		}
 
-		MensagemResposta resposta = new MensagemResposta(
-				this.servico.efetuarPagamento(this.mensagem.getPessoa(), this.mensagem.getValorPagamento()));
+		MensagemResposta<Boolean> mensagemResposta;
+
+		if (this.mensagem.getTipoMensagem() != TipoMensagem.SOLICITA_PAGAMENTO) {
+			mensagemResposta = new MensagemResposta<Boolean>(TipoMensagem.REQUISICAO_NAO_TRATAVEL, false, false);
+		} else {
+			ConteudoRequisicaoPagamento conteudo = this.mensagem.getConteudo();
+
+			boolean resultadoPagamento = this.servico.efetuarPagamento(conteudo.getPessoa(),
+					conteudo.getValorPagamento());
+			
+			TipoMensagem respostaTipoMensagem = resultadoPagamento ? TipoMensagem.SOLICITA_PAGAMENTO_SUCESSO
+					: TipoMensagem.SOLICITA_PAGAMENTO_FALHA;
+
+			mensagemResposta = new MensagemResposta<Boolean>(respostaTipoMensagem, resultadoPagamento, resultadoPagamento);
+		}
 
 		try {
-			this.outputStream.writeObject(resposta);
+			this.outputStream.writeObject(mensagemResposta);
 		} catch (IOException e) {
 			System.out.println("ERRO no envio da resposta!");
 			e.printStackTrace();
 		}
-		
+
 		try {
 			this.socket.close();
 		} catch (IOException e) {
-			System.out.println("ERRO ao fechar o socket!"); 
+			System.out.println("ERRO ao fechar o socket!");
 			e.printStackTrace();
 		}
 	}

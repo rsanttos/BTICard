@@ -1,4 +1,4 @@
-package br.com.ufrn.bti.concorrente.espatifado.bticard.mensagem;
+package br.com.ufrn.bti.concorrente.espatifado.bticard.comunicacao.mensagem;
 
 public class MensagemResposta<T> extends AbstractMensagem<T> {
 
