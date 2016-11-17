@@ -33,16 +33,35 @@ public class CartaoBancario {
 	
 	private long numeroCartao;
 
+	private double saldoDevedor;
+	
 	private double limite;
 	
 	public CartaoBancario() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CartaoBancario(Pessoa pessoa, long numeroCartao, double limite) {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public double getSaldoDevedor() {
+		return saldoDevedor;
+	}
+
+	public void setSaldoDevedor(double saldoDevedor) {
+		this.saldoDevedor = saldoDevedor;
+	}
+
+	public CartaoBancario(Pessoa pessoa, long numeroCartao, double saldoDevedor, double limite) {
 		super();
 		this.pessoa = pessoa;
 		this.numeroCartao = numeroCartao;
+		this.saldoDevedor = saldoDevedor;
 		this.limite = limite;
 	}
 

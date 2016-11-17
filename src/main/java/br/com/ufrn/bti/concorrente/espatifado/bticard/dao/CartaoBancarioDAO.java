@@ -11,7 +11,7 @@ public class CartaoBancarioDAO extends GenericDAO {
 	public CartaoBancarioDAO() {
 	}
 
-	public double getLimiteCartao(Pessoa pessoa) {
+	public CartaoBancario getCartaoDa(Pessoa pessoa) {
 		String hql = "select c from CartaoBancario c, Pessoa p  WHERE c.p.cpf= :cpf";
 		Query query = HibernateUtil.getSessionFactory().getCurrentSession().createQuery(hql);
 		query.setString("cpf", pessoa.getCpf().replaceAll("\\D", ""));
@@ -19,10 +19,10 @@ public class CartaoBancarioDAO extends GenericDAO {
 		CartaoBancario cartaoEncontrado = (CartaoBancario) query.uniqueResult();
 
 		if (cartaoEncontrado == null) {
-			return -1;
+			return null;
 		}
 
-		return cartaoEncontrado.getLimite();
+		return cartaoEncontrado;
 	}
 
 }
