@@ -15,7 +15,7 @@ public class Main {
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		int SAIDA_COM_ERRO = 1;
-		int PORT = 8888;
+		int PORT = 8889;
 		
 		ServerSocket listener = null;
 		

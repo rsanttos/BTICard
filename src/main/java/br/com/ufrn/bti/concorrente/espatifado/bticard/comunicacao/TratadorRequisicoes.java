@@ -66,7 +66,17 @@ public class TratadorRequisicoes implements Runnable {
 		}
 
 		try {
-			this.socket.close();
+			if(this.outputStream != null){
+				this.outputStream.close();
+			}
+			
+			if(this.inputStream != null){
+				this.inputStream.close();	
+			}
+			
+			if(this.socket != null){
+				this.socket.close();	
+			}
 		} catch (IOException e) {
 			System.out.println("ERRO ao fechar o socket!");
 			e.printStackTrace();
