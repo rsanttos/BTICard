@@ -1,5 +1,7 @@
 package br.com.ufrn.bti.concorrente.espatifado.bticard.comunicacao;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -28,8 +30,8 @@ public class TratadorRequisicoes implements Runnable {
 	@Override
 	public void run() {
 		try {
-			this.inputStream = new ObjectInputStream(this.socket.getInputStream());
-			this.outputStream = new ObjectOutputStream(this.socket.getOutputStream());
+			this.inputStream = new ObjectInputStream(new BufferedInputStream(this.socket.getInputStream()));
+			this.outputStream = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
 		} catch (IOException e) {
 			System.out.println("ERRO no estabelecimento da comunicação!");
 			e.printStackTrace();
@@ -60,6 +62,7 @@ public class TratadorRequisicoes implements Runnable {
 
 		try {
 			this.outputStream.writeObject(mensagemResposta);
+			this.outputStream.flush();
 		} catch (IOException e) {
 			System.out.println("ERRO no envio da resposta!");
 			e.printStackTrace();

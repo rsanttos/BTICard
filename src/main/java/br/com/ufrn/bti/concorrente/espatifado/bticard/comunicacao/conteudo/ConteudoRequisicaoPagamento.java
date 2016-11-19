@@ -1,9 +1,15 @@
 package br.com.ufrn.bti.concorrente.espatifado.bticard.comunicacao.conteudo;
 
+import java.io.Serializable;
+
 import br.com.ufrn.bti.concorrente.espatifado.bticard.dominio.Pessoa;
 
-public class ConteudoRequisicaoPagamento {
+public class ConteudoRequisicaoPagamento implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5018130925568969499L;
 	private Pessoa pessoa;
 	private double valorPagamento;
 

@@ -16,8 +16,12 @@ public class PagamentoServico {
 		CartaoBancario cartao = dao.getCartaoDa(pessoa);
 		
 		if(cartao == null){
+			System.out.println("Cartão Não existe!");
 			return false;
 		} else if((cartao.getSaldoDevedor() + valorPagamento) > cartao.getLimite()){
+			System.out.println("saldo: " + cartao.getSaldoDevedor());
+			System.out.println("valor: " + valorPagamento);
+			System.out.println("limite: " + cartao.getLimite());
 			return false;
 		}
 		

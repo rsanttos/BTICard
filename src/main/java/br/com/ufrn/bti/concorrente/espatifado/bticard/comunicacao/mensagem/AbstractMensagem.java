@@ -1,7 +1,13 @@
 package br.com.ufrn.bti.concorrente.espatifado.bticard.comunicacao.mensagem;
 
-public abstract class AbstractMensagem<T> {
+import java.io.Serializable;
 
+public abstract class AbstractMensagem<T> implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5166784794777061808L;
 	private TipoMensagem tipoMensagem;
 	private T conteudo;
 	

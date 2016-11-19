@@ -5,6 +5,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import br.com.ufrn.bti.concorrente.espatifado.bticard.comunicacao.TratadorRequisicoes;
+import br.com.ufrn.bti.concorrente.espatifado.bticard.dao.CartaoBancarioDAO;
+import br.com.ufrn.bti.concorrente.espatifado.bticard.dao.PessoaDAO;
+import br.com.ufrn.bti.concorrente.espatifado.bticard.dominio.CartaoBancario;
+import br.com.ufrn.bti.concorrente.espatifado.bticard.dominio.Pessoa;
 
 public class Main {
 
@@ -39,5 +43,4 @@ public class Main {
 			new Thread(new TratadorRequisicoes(socket)).start();
 		}
 	}
-
 }

@@ -1,13 +1,15 @@
 package br.com.ufrn.bti.concorrente.espatifado.bticard.dominio;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -15,7 +17,12 @@ import com.google.gson.annotations.SerializedName;
 
 @Entity
 @Table(name="cartao_bancario", schema="public")
-public class CartaoBancario {
+public class CartaoBancario implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4215237913619639983L;
 
 	/**
 	 * ID da entidade
@@ -28,7 +35,7 @@ public class CartaoBancario {
 	private int id;
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name="id_pessoa")
 	private Pessoa pessoa;
 	
 	private long numeroCartao;

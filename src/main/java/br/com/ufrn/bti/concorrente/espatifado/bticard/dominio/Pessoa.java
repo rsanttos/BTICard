@@ -1,5 +1,7 @@
 package br.com.ufrn.bti.concorrente.espatifado.bticard.dominio;
 
+import java.io.Serializable;
+
 /**
  * 
  */
@@ -22,9 +24,14 @@ import com.google.gson.annotations.SerializedName;
 
 @Entity
 @Table(name="pessoa", schema="public")
-public class Pessoa extends AbstractEntity{
+public class Pessoa extends AbstractEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2150362351861023838L;
 
 	/**
 	 * ID da entidade
