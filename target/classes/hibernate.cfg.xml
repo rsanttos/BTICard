@@ -19,8 +19,11 @@
 		<property name="show_sql">true</property>
 
 		<property name="current_session_context_class">thread</property>
-		<mapping class="br.com.ufrn.bti.concorrente.espatifado.bticard.dominio.Pessoa" />
-		<mapping class="br.com.ufrn.bti.concorrente.espatifado.bticard.dominio.CartaoBancario" />
+		<mapping class="br.com.ufrn.bti.dominio.Pessoa" />
+		<mapping class="br.com.ufrn.bti.dominio.Musica" />
+		<mapping class="br.com.ufrn.bti.dominio.Usuario" />
+		<mapping class="br.com.ufrn.bti.dominio.Produtora" />
+		<mapping class="br.com.ufrn.bti.dominio.CartaoBancario" />
 
 	</session-factory>
 </hibernate-configuration>
